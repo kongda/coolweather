@@ -1,5 +1,8 @@
 package com.coolweather.app.model;
 
+/*
+	this class encapsulate City
+*/
 public class City {
 
 	private int id;

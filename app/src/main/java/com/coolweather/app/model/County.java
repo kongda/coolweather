@@ -1,5 +1,9 @@
 package com.coolweather.app.model;
 
+/*
+	This class encapsulate County
+*/
+
 public class County {
 
 	private int id;

@@ -1,5 +1,8 @@
 package com.coolweather.app.model;
 
+/*
+	this class encapsulate Province
+*/
 public class Province {
 
 	private int id;

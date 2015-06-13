@@ -73,7 +73,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		String countyCode = getIntent().getStringExtra("county_code");
 		if (!TextUtils.isEmpty(countyCode)) {
 			// 有县级代号时就去查询天气
-			publishText.setText("同步中...");
+			publishText.setText("synchronizing...");
 			weatherInfoLayout.setVisibility(View.INVISIBLE);
 			cityNameText.setVisibility(View.INVISIBLE);
 			queryWeatherCode(countyCode);
@@ -95,7 +95,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 			finish();
 			break;
 		case R.id.refresh_weather:
-			publishText.setText("同步中...");
+			publishText.setText("synchronizing...");
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 			String weatherCode = prefs.getString("weather_code", "");
 			if (!TextUtils.isEmpty(weatherCode)) {
@@ -156,7 +156,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						publishText.setText("同步失败");
+						publishText.setText("synchronization failed!");
 					}
 				});
 			}
