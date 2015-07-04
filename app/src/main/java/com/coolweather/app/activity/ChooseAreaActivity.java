@@ -74,7 +74,7 @@ public class ChooseAreaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity", false);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		if (prefs.getBoolean("city_selected", false) && !isFromWeatherActivity) {
+		if (prefs.getBoolean("city_selected", true) && !isFromWeatherActivity) {
 			Intent intent = new Intent(this, WeatherActivity.class);
 			startActivity(intent);
 			finish();
@@ -85,12 +85,13 @@ public class ChooseAreaActivity extends Activity {
 		listView = (ListView) findViewById(R.id.list_view);
 		titleText = (TextView) findViewById(R.id.title_text);
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
-		listView.setAdapter(adapter);
 		coolWeatherDB = CoolWeatherDB.getInstance(this);
+		queryProvinces();  // 加载省级数据
+		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int index,
-					long arg3) {
+									long arg3) {
 				if (currentLevel == LEVEL_PROVINCE) {
 					selectedProvince = provinceList.get(index);
 					queryCities();
@@ -106,7 +107,6 @@ public class ChooseAreaActivity extends Activity {
 				}
 			}
 		});
-		queryProvinces();  // 加载省级数据
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class ChooseAreaActivity extends Activity {
 					public void run() {
 						closeProgressDialog();
 						Toast.makeText(ChooseAreaActivity.this,
-										"加载失败", Toast.LENGTH_SHORT).show();
+										R.string.sync_failed, Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
